@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+@import "tailwindcss";
+
+
+/* Example: App.css */
+body
+.font-body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-heading {
+  font-family: 'Merriweather', serif;
+}
+
+
+
+:root {
+  --color-dark: #212529;
+  --color-light: #F0F3FB;
+}
+
+.bg-dark {
+  background-color: var(--color-dark);
+}
+
+.text-dark {
+  color: var(--color-dark);
+}
+
+.bg-light {
+  background-color: var(--color-light);
+}
+
+.text-light {
+  color: var(--color-light);
+}
