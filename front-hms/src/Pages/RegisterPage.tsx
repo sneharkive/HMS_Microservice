@@ -2,6 +2,7 @@ import { Button, PasswordInput, SegmentedControl, TextInput } from "@mantine/cor
 import { IconHeartbeat } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { useForm } from "@mantine/form";
+import { registerUser } from "../Service/UserService";
 
 const RegisterPage = () => {  
   const form = useForm({
@@ -27,7 +28,13 @@ const RegisterPage = () => {
   });
 
   const handleSubmit = (values: typeof form.values) => {
-    console.log(values);
+    // console.log(values);
+    registerUser(values).then((data) => {
+      console.log(data);
+    }).catch((error) => {
+      console.log(error);
+    });
+
   };
 
   return (
