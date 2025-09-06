@@ -3,18 +3,25 @@ import { IconHeartbeat } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { useForm } from "@mantine/form";
 
-const RegisterPage = () => {
+const RegisterPage = () => {  
   const form = useForm({
     initialValues: {
       type: "PATIENT",
+      name: "",
       email: "",
       password: "",
       confirmPassword: ""
     },
 
     validate: {
+      name: (value) => (value ? null : "Name is required"),
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
-      password: (value) => (!value ? "Password is required" : null),
+      password: (value) =>
+      !value
+        ? "Password is required"
+        : !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@ $!%*?&]{8,15}$/.test(value)
+        ? "Password must be 8–15 chars, include uppercase, lowercase, digit, and special char"
+        : null,
       confirmPassword: (value, values) => (value === values.password ? null : "Password don't match."),
     },
   });
@@ -50,6 +57,14 @@ const RegisterPage = () => {
             data={[{label: "Patient", value: "PATIENT"}, {label: "Doctor", value: "DOCTOR"},{label: "Admin", value: "ADMIN"}]}
             {...form.getInputProps("type")}
 
+          />
+          <TextInput
+            variant="unstyled"
+            size="md"
+            radius="md"
+            placeholder="Enter your Name"
+            // key={form.key("email")}
+            {...form.getInputProps("name")}
           />
           <TextInput
             variant="unstyled"
