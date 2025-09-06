@@ -6,5 +6,11 @@ const registerUser = async (user:any) => {
   .catch(error => {throw error});
 }
 
+const loginUser = async (user:any) => {
+  return axiosInstance.post(`/user/login`, user)
+  .then (res => res.data)
+  .catch(error => {throw error});
+}
 
-export {registerUser};
+
+export { registerUser, loginUser };

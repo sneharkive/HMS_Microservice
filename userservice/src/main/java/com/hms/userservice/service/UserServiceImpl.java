@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hms.userservice.config.ErrorMessagesConfig;
 import com.hms.userservice.dto.LoginDTO;
 import com.hms.userservice.dto.UserDTO;
 import com.hms.userservice.entity.User;
@@ -21,11 +22,14 @@ public class UserServiceImpl implements UserService {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
+   @Autowired
+  private ErrorMessagesConfig errorMessages;
+
   @Override
   public void registerUser(UserDTO userDTO) throws HmsException {
     Optional<User> opt = userRepository.findByEmail(userDTO.getEmail());
     if(opt.isPresent())
-      throw new HmsException("USER_ALREADY_EXIST");
+      throw new HmsException(errorMessages.getMessage("USER_ALREADY_EXIST"));
     
     userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
     userRepository.save(userDTO.toEntity());
@@ -33,8 +37,8 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserDTO loginUser(LoginDTO loginDTO) throws HmsException{
-    User user = userRepository.findByEmail(loginDTO.getEmail()).orElseThrow(() -> new HmsException("USER_NOT_FOUND"));
-    if(!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) throw new HmsException("INVALID_CREDENTIALS");
+    User user = userRepository.findByEmail(loginDTO.getEmail()).orElseThrow(() -> new HmsException(errorMessages.getMessage("USER_NOT_FOUND")));
+    if(!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) throw new HmsException(errorMessages.getMessage("INVALID_CREDENTIALS"));
     user.setPassword(null);
 
     return user.toDTO();
@@ -42,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserDTO getUserById(Long id) throws HmsException {
-    return userRepository.findById(id).orElseThrow(() -> new HmsException("USER_NOT_FOUND")).toDTO();
+    return userRepository.findById(id).orElseThrow(() -> new HmsException(errorMessages.getMessage("USER_NOT_FOUND"))).toDTO();
   }
 
   @Override
@@ -53,7 +57,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserDTO getUser(String email) throws HmsException {
-    return userRepository.findByEmail(email).orElseThrow(() -> new HmsException("USER_NOT_FOUND")).toDTO();
+    return userRepository.findByEmail(email).orElseThrow(() -> new HmsException(errorMessages.getMessage("USER_NOT_FOUND"))).toDTO();
   }
   
 }

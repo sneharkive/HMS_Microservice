@@ -1,13 +1,18 @@
 import { Button, PasswordInput, SegmentedControl, TextInput } from "@mantine/core";
 import { IconHeartbeat } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "@mantine/form";
 import { registerUser } from "../Service/UserService";
+import { ErrorNotification, SuccessNotification } from "../Utility/NotificationUtil";
+import { useState } from "react";
 
 const RegisterPage = () => {  
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const form = useForm({
     initialValues: {
-      type: "PATIENT",
+      role: "PATIENT",
       name: "",
       email: "",
       password: "",
@@ -28,13 +33,16 @@ const RegisterPage = () => {
   });
 
   const handleSubmit = (values: typeof form.values) => {
+    setLoading(true);
     // console.log(values);
     registerUser(values).then((data) => {
       console.log(data);
+      SuccessNotification("Registered Successfully! Please Login to continue.");
+      navigate("/login");
     }).catch((error) => {
       console.log(error);
-    });
-
+      ErrorNotification(error.response.data.errorMessage || "Something went wrong. Please try again.");
+    }).finally(() => setLoading(false));
   };
 
   return (
@@ -62,7 +70,7 @@ const RegisterPage = () => {
             radius="md"
             bg="none" className="[&_*]:text-white border-white border"
             data={[{label: "Patient", value: "PATIENT"}, {label: "Doctor", value: "DOCTOR"},{label: "Admin", value: "ADMIN"}]}
-            {...form.getInputProps("type")}
+            {...form.getInputProps("role")}
 
           />
           <TextInput
@@ -98,7 +106,7 @@ const RegisterPage = () => {
             {...form.getInputProps("confirmPassword")}
           />
 
-          <Button type="submit" size="md" radius="md" color="pink.6">
+          <Button loading={loading} type="submit" size="md" radius="md" color="pink.6">
             Register
           </Button>
           <div className="self-center text-neutral-200 text-md">

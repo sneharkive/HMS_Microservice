@@ -25,14 +25,14 @@ public class ExceptionControllerAdvice {
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ErrorInfo> exceptionHandler(Exception e) {
-    ErrorInfo error = new ErrorInfo("Some error occurred.", HttpStatus.INTERNAL_SERVER_ERROR.value(),
+    ErrorInfo error = new ErrorInfo("Some error occurred." + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(),
         LocalDateTime.now());
     return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @ExceptionHandler(HmsException.class)
   public ResponseEntity<ErrorInfo> HmsExceptionHandler(Exception e) {
-    ErrorInfo error = new ErrorInfo(environment.getProperty(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR.value(),
+    ErrorInfo error = new ErrorInfo(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(),
         LocalDateTime.now());
     return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
   }
