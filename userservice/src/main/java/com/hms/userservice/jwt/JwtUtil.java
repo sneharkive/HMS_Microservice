@@ -41,7 +41,7 @@ public class JwtUtil {
     claims.put("role", user.getRole());
     claims.put("SECRET_KEY", "SECRET_KEY"); 
 
-    return doGenerateToken(claims, userDetails.getUsername());  
+    return doGenerateToken(claims, user.getUsername());  
   }
 
   public String doGenerateToken(Map<String, Object> claims, String subject) {
