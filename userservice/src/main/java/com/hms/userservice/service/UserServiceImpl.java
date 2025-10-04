@@ -10,7 +10,7 @@ import com.hms.userservice.config.ErrorMessagesConfig;
 import com.hms.userservice.dto.LoginDTO;
 import com.hms.userservice.dto.UserDTO;
 import com.hms.userservice.entity.User;
-import com.hms.userservice.exception.HmsException;
+import com.hms.common_resource.exception.HmsException;
 import com.hms.userservice.repository.UserRepository;
 
 @Service

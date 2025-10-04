@@ -1,4 +1,4 @@
-package com.hms.userservice.exception;
+package com.hms.common_resource.exception;
 
 public class HmsException extends Exception {
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hms.userservice.dto.LoginDTO;
 import com.hms.userservice.dto.ResponseDTO;
 import com.hms.userservice.dto.UserDTO;
-import com.hms.userservice.exception.HmsException;
+import com.hms.common_resource.exception.HmsException;
 import com.hms.userservice.jwt.JwtUtil;
 import com.hms.userservice.service.UserService;
 

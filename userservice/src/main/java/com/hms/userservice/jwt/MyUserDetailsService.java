@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.hms.userservice.dto.UserDTO;
-import com.hms.userservice.exception.HmsException;
+import com.hms.common_resource.exception.HmsException;
 import com.hms.userservice.service.UserService;
 
 
