@@ -2,9 +2,9 @@ package com.hms.userservice.service;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hms.userservice.config.ErrorMessagesConfig;
 import com.hms.userservice.dto.LoginDTO;
@@ -13,17 +13,20 @@ import com.hms.userservice.entity.User;
 import com.hms.common_resource.exception.HmsException;
 import com.hms.userservice.repository.UserRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
+@Transactional  // To handle lazy loading issues and ensure data integrity (ACID properties)
 public class UserServiceImpl implements UserService {
 
-  @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+  private final PasswordEncoder passwordEncoder;
 
-   @Autowired
-  private ErrorMessagesConfig errorMessages;
+  private final ErrorMessagesConfig errorMessages;
+
+  private final ApiService apiService;
 
   @Override
   public void registerUser(UserDTO userDTO) throws HmsException {
@@ -32,6 +35,9 @@ public class UserServiceImpl implements UserService {
       throw new HmsException(errorMessages.getMessage("USER_ALREADY_EXIST"));
     
     userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+    Long profileId = apiService.addProfile(userDTO).block();
+    if(profileId == null) throw new HmsException(errorMessages.getMessage("INVALID_ROLE"));
+    userDTO.setProfileId(profileId != null ? profileId.longValue() : null);
     userRepository.save(userDTO.toEntity());
   }
 
