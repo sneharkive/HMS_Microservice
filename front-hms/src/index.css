@@ -39,3 +39,7 @@ body
 .text-light {
   color: var(--color-light);
 }
+
+:root{
+  background-color: rgb(94, 108, 126);
+}

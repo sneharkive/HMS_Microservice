@@ -1,4 +1,4 @@
-import { Menu, Button, Text, Avatar } from '@mantine/core';
+import { Menu, Text, Avatar } from '@mantine/core';
 import {
   IconSettings,
   IconSearch,
@@ -19,7 +19,7 @@ const ProfileMenu = () => {
       <Menu.Target>
         <div className='flex gap-3 items-center cursor-pointer'>
           <span className='font-medium text-lg text-neutral-800'>{user.name}</span>
-          <Avatar variant='filled' src="avatar.png" size={45} alt="My Profile" />
+          <Avatar variant='filled' src="/avatar.png" size={45} alt="My Profile" />
         </div>
       </Menu.Target>
 
