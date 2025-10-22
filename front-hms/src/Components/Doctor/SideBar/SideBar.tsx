@@ -5,6 +5,7 @@ import {
   IconLayoutGrid,
   IconMoodHeart,
   IconStethoscope,
+  IconUser,
   IconVaccine,
 } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
@@ -13,27 +14,27 @@ import { NavLink, Link } from "react-router-dom";
 const links = [
   {
     name: "Dashboard",
-    url: "/dashboard",
+    url: "/doctor/dashboard",
     icon: <IconLayoutGrid stroke={1.5} />,
   },
   {
-    name: "Doctors",
-    url: "/doctors",
-    icon: <IconStethoscope stroke={1.5} />,
+    name: "Profile",
+    url: "/doctor/profile",
+    icon: <IconUser stroke={1.5} />,
   },
   {
     name: "Patients",
-    url: "/patients",
+    url: "/doctor/patients",
     icon: <IconMoodHeart stroke={1.5} />,
   },
   {
     name: "Appointments",
-    url: "/appointments",
+    url: "/doctor/appointments",
     icon: <IconCalendarCheck stroke={1.5} />,
   },
   {
     name: "Pharmacy",
-    url: "/pharmacy",
+    url: "/doctor/pharmacy",
     icon: <IconVaccine stroke={1.5} />,
   },
 ];

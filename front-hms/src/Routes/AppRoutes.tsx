@@ -7,6 +7,8 @@ import PublicRoute from './PublicRoute'
 import ProtectedRoute from './ProtectedRoute'
 import PatientDashboard from '../Layout/PatientDashboard'
 import PatientProfilePage from '../Pages/Patient/PatientProfilePage'
+import DoctorDashboard from '../Layout/DoctorDashboard'
+import DoctorProfilePage from '../Pages/Doctor/DoctorProfilePage'
 
 
 const AppRoutes = () => {
@@ -22,6 +24,14 @@ const AppRoutes = () => {
             <Route path='/doctors' element={<Home/>} />
           </Route>
 
+
+          <Route path="/doctor"  element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute> } >
+            <Route path='dashboard' element={<Home/>} />
+            <Route path='profile' element={<DoctorProfilePage />} />
+            <Route path='patients' element={<Home />} />
+            <Route path='appointments' element={<Home/>} />
+            <Route path='pharmacy' element={<Home/>} />
+          </Route>
 
           <Route path="/patient"  element={<ProtectedRoute><PatientDashboard /></ProtectedRoute> } >
             <Route path='dashboard' element={<Home/>} />
